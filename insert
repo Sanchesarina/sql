@@ -1,0 +1,127 @@
+insert into genre(genre_name)
+values
+('кантри'),
+('рок'),
+('блюз'),
+('джаз'),
+('хип-хоп')
+
+
+insert into singer(nickname)
+values
+('Johnny Cash'),
+('Willie Nelson'),
+('Carrie Underwood'),
+('Eric Clapton'),
+('Alabama Shakes'),
+('The Beatles'),
+('Deep Purple'),
+('Pink Floyd'),
+('Louis Armstrong'),
+('Eminem')
+
+insert into album(name_album, year_album)
+values
+('At Folsom Prison', '01.01.1968'),
+('Always On My Mind', '01.01.1982'),
+('Blown Away', '01.01.2012'),
+('Unplugged', '01.01.1992'),
+('Boys and Girls', '01.01.2020'),
+('Abbey Road', '01.01.1969'),
+('Perfect Strangers', '01.01.1984'),
+('The Dark Side of the Moon', '01.01.1973'),
+('Ella and Louis', '01.01.1956'),
+('Revival', '01.01.2019')
+
+insert into complitation(name_complitation, year_complitation)
+values
+('sbornik_1', '01.01.2018'),
+('sbornik_2', '01.01.2020'),
+('sbornik_3', '01.01.2018'),
+('sbornik_4', '01.01.2019'),
+('sbornik_5', '01.01.2004'),
+('sbornik_6', '01.01.2006'),
+('sbornik_7', '01.01.2004'),
+('sbornik_8', '01.01.2015')
+
+insert into track(track_name, duration, album_id)
+values
+('Orange Blossom Special', 230, 1),
+('Cocaine Blues Folsom Rehears', 200, 1),
+('Staring Each Other Down', 139, 2),
+('Last Thing I Needed First Thin', 261, 2),
+('Good in Goodbye', 259, 3),
+('Cupids Got a Shotgun', 224, 3),
+('Layla', 286, 4),
+('Walkin my Blues', 217, 4),
+('Slave to Love', 266, 5),
+('Boys and Girls', 326, 5),
+('Something', 183, 6),
+('Because', 166, 6),
+('Knocking at Your Back Door', 425, 7),
+('Under the Gun', 275, 7),
+('The Great Gig in the my Sky', 284, 8),
+('On the Run', 120, 8),
+('Tenderly', 300, 9),
+('Moonlight in Vermont', 120, 9),
+('Chloraseptic', 300, 10),
+('River', 200, 10)
+
+insert into singer_genre(singer_id, genre_id)
+values
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 3),
+(5, 3),
+(6, 2),
+(7, 2),
+(8, 2),
+(9, 4),
+(10, 5),
+(9, 5)
+
+insert into album_singer(album_id, singer_id)
+values
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10)
+
+insert into complitation_track(complitation_id, track_id)
+values
+(1, 1),
+(1, 12),
+(1, 13),
+(1, 4),
+(2, 2),
+(2, 7),
+(2, 9),
+(3, 1),
+(3, 10),
+(3, 11),
+(3, 18),
+(4, 9),
+(4, 3),
+(4, 8),
+(5, 14),
+(5, 15),
+(5, 16),
+(6, 17),
+(6, 19),
+(6, 20),
+(7, 1),
+(7, 15),
+(7, 20),
+(7, 19),
+(8, 4),
+(8, 8),
+(8, 10),
+(8, 12),
+(8, 14)
