@@ -1,0 +1,76 @@
+--Количество исполнителей в каждом жанре.
+select g.genre_name, count(singer_id)
+from singer_genre sg 
+join genre g on g.genre_id = sg.genre_id 
+group by g.genre_name 
+order by 2 desc
+
+--Количество треков, вошедших в альбомы 2019–2020 годов.
+select count(track_id)
+from track t
+join album a on a.album_id = t.album_id
+where a.year_album between '01.01.2019' and '01.01.2020'
+
+--Средняя продолжительность треков по каждому альбому.
+select a.name_album, avg(duration) as "Среднее в секундах"
+from track t
+join album a on a.album_id = t.album_id
+group by a.name_album 
+
+--Все исполнители, которые не выпустили альбомы в 2020 году.
+select s.nickname 
+from album_singer as2 
+join album a on a.album_id = as2.album_id 
+join singer s on s.singer_id  = as2.singer_id 
+where a.year_album <> '01.01.2020'
+group by 1
+
+--Названия сборников, в которых присутствует конкретный исполнитель (выберите его сами).
+select c.name_complitation 
+from complitation_track ct 
+join complitation c on c.complitation_id = ct.complitation_id 
+join track t on ct.track_id = t.track_id 
+join album_singer as2 on as2.album_id = t.album_id 
+join singer s on s.singer_id = as2.singer_id 
+where s.nickname = 'Deep Purple'
+group by 1
+
+--Названия альбомов, в которых присутствуют исполнители более чем одного жанра.
+select a.name_album 
+from
+	(select as2.album_id, count(*) as counter
+	from album_singer as2 
+	join singer_genre sg on as2.singer_id = sg.singer_id
+	group by as2.album_id) ad
+join album a on ad.album_id = a.album_id 
+where counter > 1
+
+--Наименования треков, которые не входят в сборники.
+select t2.track_name 
+from
+	(select track_id
+	from track t 
+	except
+	select distinct track_id 
+	from complitation_track ct) af
+join track t2 on t2.track_id = af.track_id
+
+--Исполнитель или исполнители, написавшие самый короткий по продолжительности трек, — теоретически таких треков может быть несколько.
+select s.nickname, af.duration
+from
+	(select *
+	from track t 
+	where duration = 
+		(select min(duration) 
+		from track t )) af
+join album_singer as2 on as2.album_id = af.album_id
+join singer s on s.singer_id = as2.singer_id 
+
+--Названия альбомов, содержащих наименьшее количество треков.
+select name_album, min(count_track)
+from
+	(select a.name_album, count(track_id) as count_track
+	from track t 
+	join album a on t.album_id = a.album_id 
+	group by a.name_album) as q
+group by 1
